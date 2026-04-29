@@ -1,12 +1,10 @@
 package com.demo;
 
 import org.springframework.stereotype.Service;
-import java.time.Instant;
+import java.util.UUID;
 
 @Service
 public class DemoService {
-    public String getStatus() {
-        return "OK at " + Instant.now();
-    }
-    // auto-commit: () => Date.now() 
+    public String generateId() { return UUID.randomUUID().toString(); }
+    // auto-commit: () => Date.now()
 }

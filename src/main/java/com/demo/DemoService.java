@@ -8,5 +8,5 @@ public class DemoService {
     public String getStatus() {
         return "OK at " + Instant.now();
     }
-    // auto-commit: () => Date.now()
+    // auto-commit: () => Date.now() 
 }

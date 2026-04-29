@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DemoService {
-    public String reverse(String s) {
-        return new StringBuilder(s).reverse().toString();
+    public boolean validate(String input) {
+        return input != null && !input.isEmpty();
     }
     // auto-commit: () => Date.now()
 }

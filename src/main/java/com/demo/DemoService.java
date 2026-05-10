@@ -1,12 +1,14 @@
 package com.demo;
 
 import org.springframework.stereotype.Service;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class DemoService {
-    private AtomicInteger counter = new AtomicInteger(0);
-    public int increment() { return counter.incrementAndGet(); }
-    public int get() { return counter.get(); }
+    private final List<String> log = new ArrayList<>();
+
+    public void record(String msg) { log.add(msg); }
+    public List<String> getLogs() { return log; }
     // auto-commit: () => Date.now()
 }

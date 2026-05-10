@@ -4,7 +4,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DemoService {
-    public int add(int a, int b) { return a + b; }
-    public int multiply(int a, int b) { return a * b; }
+    public double calculate(double x, double y) {
+        return Math.sqrt(x * x + y * y);
+    }
     // auto-commit: () => Date.now()
 }

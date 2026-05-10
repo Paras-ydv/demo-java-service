@@ -4,7 +4,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DemoService {
-    public int add(int a, int b) { return a + b; }
-    public int multiply(int a, int b) { return a * b; }
+    public boolean validate(String input) {
+        return input != null && !input.isEmpty();
+    }
     // auto-commit: () => Date.now()
 }

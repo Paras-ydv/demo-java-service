@@ -4,8 +4,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DemoService {
-    public String reverse(String s) {
-        return new StringBuilder(s).reverse().toString();
-    }
+    public int add(int a, int b) { return a + b; }
+    public int multiply(int a, int b) { return a * b; }
     // auto-commit: () => Date.now()
 }

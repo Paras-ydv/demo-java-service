@@ -1,14 +1,10 @@
 package com.demo;
 
 import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.UUID;
 
 @Service
 public class DemoService {
-    private final List<String> log = new ArrayList<>();
-
-    public void record(String msg) { log.add(msg); }
-    public List<String> getLogs() { return log; }
+    public String generateId() { return UUID.randomUUID().toString(); }
     // auto-commit: () => Date.now()
 }

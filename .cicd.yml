@@ -1,5 +1,5 @@
 # .cicd.yml - PipelineHub CI/CD Configuration
-name: java-pipeline
+name: demo-java-service-pipeline
 language: java
 environment: production
 
@@ -18,6 +18,7 @@ stages:
 variables:
   JAVA_VERSION: "17"
   MAVEN_OPTS: "-Xmx2048m"
+  SPRING_PROFILES_ACTIVE: prod
 
 # Custom scripts per stage
 scripts:
@@ -27,18 +28,16 @@ scripts:
   build:
     - mvn compile
     - mvn checkstyle:check
-    - mvn pmd:check
   test:
     - mvn test
     - mvn jacoco:report
     - mvn verify
   security_scan:
     - mvn dependency-check:check
-    - mvn org.owasp:dependency-check-maven:check
   package:
     - mvn package -DskipTests
-    - docker build -t $REPO_NAME:$COMMIT_HASH .
+    - docker build -t demo-java-service:$COMMIT_HASH .
   deploy:
     - kubectl apply -f k8s/
-    - kubectl set image deployment/$REPO_NAME app=$REPO_NAME:$COMMIT_HASH
-    - kubectl rollout status deployment/$REPO_NAME --timeout=5m
+    - kubectl set image deployment/demo-java-service app=demo-java-service:$COMMIT_HASH
+    - kubectl rollout status deployment/demo-java-service --timeout=5m

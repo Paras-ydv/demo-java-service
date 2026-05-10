@@ -1,12 +1,13 @@
 package com.demo;
 
 import org.springframework.stereotype.Service;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+import java.util.List;
 
 @Service
 public class DemoService {
-    private AtomicInteger counter = new AtomicInteger(0);
-    public int increment() { return counter.incrementAndGet(); }
-    public int get() { return counter.get(); }
+    public List<String> filter(List<String> items, String prefix) {
+        return items.stream().filter(s -> s.startsWith(prefix)).collect(Collectors.toList());
+    }
     // auto-commit: () => Date.now()
 }

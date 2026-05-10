@@ -1,10 +1,12 @@
 package com.demo;
 
 import org.springframework.stereotype.Service;
+import java.time.Instant;
 
 @Service
 public class DemoService {
-    public int add(int a, int b) { return a + b; }
-    public int multiply(int a, int b) { return a * b; }
+    public String getStatus() {
+        return "OK at " + Instant.now();
+    }
     // auto-commit: () => Date.now()
 }

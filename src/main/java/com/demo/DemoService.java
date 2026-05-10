@@ -1,13 +1,13 @@
 package com.demo;
 
 import org.springframework.stereotype.Service;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.stream.Collectors;
+import java.util.List;
 
 @Service
 public class DemoService {
-    private Map<String, Object> cache = new HashMap<>();
-    public void put(String k, Object v) { cache.put(k, v); }
-    public Object get(String k) { return cache.get(k); }
+    public List<String> filter(List<String> items, String prefix) {
+        return items.stream().filter(s -> s.startsWith(prefix)).collect(Collectors.toList());
+    }
     // auto-commit: () => Date.now()
 }

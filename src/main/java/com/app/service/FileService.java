@@ -1,20 +1,19 @@
 package com.app.service;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import lombok.RequiredArgsConstructor;
+import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class FileService {
     private final FileRepository repository;
-    private final EventPublisher eventPublisher;
 
-    @Transactional
-    public void processFile(String id) {
-        var entity = repository.findById(id).orElseThrow();
-        entity.process();
-        repository.save(entity);
-        eventPublisher.publish(new FileProcessedEvent(entity));
+    @Cacheable("items")
+    public Optional<File> findById(Long id) {
+        return repository.findById(id);
+    }
+
+    public void deleteById(Long id) {
+        repository.deleteById(id);
     }
 }

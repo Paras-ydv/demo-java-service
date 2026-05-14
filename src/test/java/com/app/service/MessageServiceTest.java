@@ -1,23 +1,26 @@
 package com.app.service;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-class MessageServiceIntegrationTest {
-    @Autowired
+@ExtendWith(MockitoExtension.class)
+class MessageServiceTest {
+    @Mock
+    private MessageRepository repository;
+
+    @InjectMocks
     private MessageService service;
 
-    @BeforeEach
-    void setUp() {
-        // Setup test data
-    }
-
     @Test
-    void testServiceIntegration() {
+    void testFindAll() {
+        when(repository.findAll()).thenReturn(List.of());
         var result = service.findAll();
         assertNotNull(result);
+        verify(repository).findAll();
     }
 }

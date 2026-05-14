@@ -1,19 +1,20 @@
 package com.app.service;
 
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository repository;
+    private final EventPublisher eventPublisher;
 
-    @Cacheable("items")
-    public Optional<Order> findById(Long id) {
-        return repository.findById(id);
-    }
-
-    public void deleteById(Long id) {
-        repository.deleteById(id);
+    @Transactional
+    public void processOrder(String id) {
+        var entity = repository.findById(id).orElseThrow();
+        entity.process();
+        repository.save(entity);
+        eventPublisher.publish(new OrderProcessedEvent(entity));
     }
 }

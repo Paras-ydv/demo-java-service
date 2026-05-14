@@ -1,7 +1,7 @@
 # .cicd.yml - PipelineHub CI/CD Configuration
 name: demo-java-service-pipeline
 language: java
-environment: production
+environment: development
 
 # Pipeline stages to execute
 stages:

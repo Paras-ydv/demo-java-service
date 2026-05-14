@@ -1,22 +1,19 @@
 package com.app.service;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import java.util.concurrent.CompletableFuture;
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AnalyticsService {
     private final AnalyticsRepository repository;
 
-    public AnalyticsService(AnalyticsRepository repository) {
-        this.repository = repository;
+    @Cacheable("items")
+    public Optional<Analytics> findById(Long id) {
+        return repository.findById(id);
     }
 
-    public CompletableFuture<List<Analytics>> findAll() {
-        return CompletableFuture.supplyAsync(() -> repository.findAll());
-    }
-
-    public Analytics save(Analytics entity) {
-        return repository.save(entity);
+    public void deleteById(Long id) {
+        repository.deleteById(id);
     }
 }
